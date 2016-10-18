@@ -33,7 +33,7 @@
         }
 
         .content div:nth-of-type(odd) {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.03);
         }
 
         .content div:before {
