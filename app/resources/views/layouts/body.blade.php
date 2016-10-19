@@ -21,7 +21,20 @@
             integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
             crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <script>
-        hljs.initHighlightingOnLoad();
+        function updateHash(line) {
+            var currentHash = window.location.hash;
+
+            var regex = /(\d+)/;
+            var lines = currentHash.split(regex);
+            console.log(lines);
+        }
+
+        function toggleHighlight(el) {
+            var line = $(el).data('line');
+
+            updateHash(line);
+        }
     </script>
 </body>
