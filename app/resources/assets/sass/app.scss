@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:200,300');
+
 html,
 body {
+  font-family: 'Dosis', sans-serif;
   background: #002b36;
   padding: 0;
   margin: 0;
@@ -13,6 +16,7 @@ body {
 
 pre {
   display: inline-block;
+  min-width: 100%;
 
   & > code {
     padding: 0 !important;
@@ -21,6 +25,7 @@ pre {
 
 .content {
   height: 100%;
+  padding-right: 300px;
 
   & div {
     margin: -15px auto;
@@ -36,9 +41,50 @@ pre {
       border-right: 1px solid rgba(255,255,255,0.4);
       padding: 2px 5px;
       margin-right: 5px;
-      width: 30px;
       text-align: right;
-      display: inline-block;
+    }
+  }
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  background: #333;
+  color: white;
+  text-align: center;
+
+  .title {
+    background-color: #444;
+    font-size: 30px;
+    padding: 20px 0;
+  }
+
+  .footer {
+    padding: 20px 5px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    h3 {
+      text-transform: uppercase;
+    }
+
+    .powered-by {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      font-weight: 300;
+      display: flex;
+      justify-content: space-around;
+
+      li {
+        display: inline-block;
+      }
     }
   }
 }

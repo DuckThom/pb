@@ -23,9 +23,10 @@ class BinController extends Controller
 
         if (File::exists($path)) {
             $code = File::get($path);
+            $lines = explode("\n", $code);
 
             return view('paste.show', [
-                'code' => $code
+                'lines' => $lines
             ]);
         } else {
             abort(404, "Paste not found");
