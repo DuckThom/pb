@@ -1,0 +1,44 @@
+html,
+body {
+  background: #002b36;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+pre {
+  display: inline-block;
+
+  & > code {
+    padding: 0 !important;
+  }
+}
+
+.content {
+  height: 100%;
+
+  & div {
+    margin: -15px auto;
+    line-height: 15px;
+    padding: 2px 5px;
+
+    &:nth-of-type(odd) {
+      background: rgba(255,255,255,0.03);
+    }
+
+    &:before {
+      content: attr(data-prefix);
+      border-right: 1px solid rgba(255,255,255,0.4);
+      padding: 2px 5px;
+      margin-right: 5px;
+      width: 30px;
+      text-align: right;
+      display: inline-block;
+    }
+  }
+}
