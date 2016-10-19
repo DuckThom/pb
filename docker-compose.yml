@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+
+### Nginx Server Container ##################################
+
+    nginx:
+        build: ./nginx
+        restart: always
+        volumes_from:
+            - php
+        environment:
+            VIRTUAL_HOST: 'bin.local'
+        expose:
+            - "80"
+            - "443"
+        links:
+            - php
+        networks:
+            - default
+            - proxy
+
+### PHP Container ###########################################
+
+    php:
+        build: ./php
+        restart: always
+        volumes:
+            - ./app/:/var/www/html
+            - ./code/:/var/www/html/storage/code # Fiche output folder
+        expose:
+            - "9000"
+        networks:
+            - default
+
+networks:
+    # nginx-proxy image network
+    proxy:
+        external:
+            name: proxy_network
