@@ -1,0 +1,25 @@
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 300px;
+  bottom: 0;
+
+  & div {
+    margin: -15px auto;
+    line-height: 15px;
+    padding: 2px 5px;
+
+    &:nth-of-type(odd) {
+      background: rgba(255,255,255,0.03);
+    }
+
+    &:before {
+      content: attr(data-prefix);
+      border-right: 1px solid rgba(255,255,255,0.4);
+      padding: 2px 5px;
+      margin-right: 5px;
+      text-align: right;
+    }
+  }
+}
