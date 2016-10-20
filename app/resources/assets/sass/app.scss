@@ -19,12 +19,3 @@ body {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
-pre {
-  display: inline-block;
-  min-width: 100%;
-
-  & > code {
-    padding: 0 !important;
-  }
-}

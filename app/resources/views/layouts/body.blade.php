@@ -1,6 +1,6 @@
 <body>
     <div class="content">
-        <pre><code>@yield('code')</code></pre>
+        <div class="code">@yield('code')</div>
     </div>
 
     <div class="sidebar">
@@ -21,20 +21,55 @@
             integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
             crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
     <script>
-        function updateHash(line) {
-            var currentHash = window.location.hash;
-
-            var regex = /(\d+)/;
-            var lines = currentHash.split(regex);
-            console.log(lines);
+        $('div.code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+    </script>
+    <script>
+        function hashToArray() {
+            var currentHash = window.location.hash.replace("#", "");
+            return currentHash.split(',');
         }
 
-        function toggleHighlight(el) {
-            var line = $(el).data('line');
+        function checkHighlights() {
+            var lines = hashToArray();
+
+            $('.code > div').each(function (i, el) {
+                var $el = $(el);
+                var line = $el.data('line');
+
+                if ($.inArray(line.toString(), lines) > -1) {
+                    $el.addClass('target');
+                } else {
+                    $el.removeClass('target');
+                }
+            });
+        }
+
+        function updateHash(line) {
+            var lines = hashToArray();
+            var index = $.inArray(line.toString(), lines);
+
+            if (index > -1) {
+                lines.splice(index, 1);
+            } else {
+                lines.push(line);
+            }
+
+            window.location.hash = lines.join().replace(/^,/, "");
+
+            checkHighlights();
+        }
+
+        $('.code > div').on('click', function (evt) {
+            var line = $(this).data('line');
 
             updateHash(line);
-        }
+        });
+
+        $(document).ready(function () {
+            checkHighlights();
+        });
     </script>
 </body>

@@ -5,21 +5,40 @@
   right: 300px;
   bottom: 0;
 
-  & div {
-    margin: -15px auto;
-    line-height: 15px;
-    padding: 2px 5px;
+  .code {
+    padding: 0;
 
-    &:nth-of-type(odd) {
-      background: rgba(255,255,255,0.03);
-    }
+    div {
+      padding: 0 5px;
+      white-space: pre;
+      font-family: monospace;
 
-    &:before {
-      content: attr(data-prefix);
-      border-right: 1px solid rgba(255,255,255,0.4);
-      padding: 2px 5px;
-      margin-right: 5px;
-      text-align: right;
+      &.target {
+        background: #111 !important;
+
+        &:before {
+          content: '>' attr(data-prefix);
+        }
+      }
+
+      &:hover {
+        background: #111 !important;
+        cursor: pointer;
+      }
+
+      &:nth-of-type(odd) {
+        background: rgba(255,255,255,0.03);
+      }
+
+      &:before {
+        content: attr(data-prefix);
+        border-right: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 2px 5px;
+        margin: 0 5px;
+        text-align: right;
+        display: inline-block;
+        width: 75px;
+      }
     }
   }
 }
