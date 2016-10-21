@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install libmcrypt-dev -y
 
 # Install extensions using the helper script provided by the base image
 RUN docker-php-ext-install \
+    pdo_mysql \
     mcrypt
 
 RUN usermod -u 1000 www-data
