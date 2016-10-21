@@ -30,11 +30,29 @@ services:
             - ./code/:/var/www/html/storage/code # Fiche output folder
         expose:
             - "9000"
+        links:
+            - mysql
         networks:
             - default
+
+### MySql Container #########################################
+
+    mysql:
+        image: mysql:5.6
+        restart: always
+        command: 'mysqld'
+        volumes:
+            - ./mysql/:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: 'fiche'
+            MYSQL_USER: 'lumen'
+            MYSQL_PASSWORD: 'secret'
+            MYSQL_ROOT_PASSWORD: root
+        expose:
+            - "3306"
 
 networks:
     # nginx-proxy image network
     proxy:
         external:
-            name: proxy_network
+            name: proxy_default
