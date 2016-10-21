@@ -10,7 +10,7 @@ services:
         volumes_from:
             - php
         environment:
-            VIRTUAL_HOST: 'bin.local'
+            VIRTUAL_HOST: 'example.com'
         expose:
             - "80"
             - "443"
@@ -44,10 +44,10 @@ services:
         volumes:
             - ./mysql/:/var/lib/mysql
         environment:
-            MYSQL_DATABASE: 'fiche'
-            MYSQL_USER: 'lumen'
+            MYSQL_DATABASE: 'db'
+            MYSQL_USER: 'user'
             MYSQL_PASSWORD: 'secret'
-            MYSQL_ROOT_PASSWORD: root
+            MYSQL_ROOT_PASSWORD: 'bigger-secret'
         expose:
             - "3306"
 
