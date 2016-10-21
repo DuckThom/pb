@@ -2,3 +2,4 @@
 /mysql
 /code
 docker-compose.yml
+.slack_webhook
