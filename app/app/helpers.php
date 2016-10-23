@@ -22,6 +22,6 @@ if (! function_exists('public_path')) {
      */
     function public_path($path = '')
     {
-        return base_path('public' . $path);
+        return base_path('public'.$path);
     }
 }

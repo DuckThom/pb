@@ -7,12 +7,10 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 /**
- * Class CleanOldPastes
- * @package App\Console\Commands
+ * Class CleanOldPastes.
  */
 class CleanOldPastes extends Command
 {
-
     /**
      * @var string
      */
@@ -24,7 +22,7 @@ class CleanOldPastes extends Command
     protected $description = 'Remove old pastes from the filesystem';
 
     /**
-     * Command handler
+     * Command handler.
      */
     public function handle()
     {
@@ -44,5 +42,4 @@ class CleanOldPastes extends Command
 
         $this->info("Removed {$removedDirCount} pastes");
     }
-
 }

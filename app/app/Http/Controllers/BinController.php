@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use File;
 
 /**
- * Class BinController
- * @package App\Http\Controllers
+ * Class BinController.
  */
 class BinController extends Controller
 {
-
     /**
-     * Show a paste
+     * Show a paste.
      *
      * @param  string  $slug
      * @return \Illuminate\View\View
@@ -26,11 +24,10 @@ class BinController extends Controller
             $lines = explode("\n", $code);
 
             return view('paste.show', [
-                'lines' => $lines
+                'lines' => $lines,
             ]);
         } else {
-            abort(404, "Paste not found");
+            abort(404, 'Paste not found');
         }
     }
-
 }

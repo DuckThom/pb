@@ -24,7 +24,7 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withFacades(true, [
-    'Illuminate\Support\Facades\File' => 'File'
+    'Illuminate\Support\Facades\File' => 'File',
 ]);
 
 // $app->withEloquent();
