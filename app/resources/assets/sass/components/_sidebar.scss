@@ -4,13 +4,14 @@
   left: 0;
   bottom: 0;
   width: 300px;
-  background: #333;
-  color: white;
+  background: #fdf6e3;
+  color: #b58900;
   text-align: center;
   z-index: 1;
 
   .title {
-    background-color: #444;
+    background-color: #b58900;
+    color: white;
     font-size: 30px;
     padding: 20px 0;
   }
