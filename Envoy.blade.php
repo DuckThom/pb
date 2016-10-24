@@ -4,7 +4,7 @@
     $slack_webhook = file_get_contents('.slack_webhook')
 @endsetup
 
-@task('deploy', ['on' => $server])
+@task('deploy', ['on' => $server, 'confirm' => true])
     cd docker/pb
 
     git pull origin master
