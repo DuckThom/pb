@@ -1,8 +1,4 @@
 <body>
-    <div class="content">
-        <div class="code">@yield('code')</div>
-    </div>
-
     <div class="sidebar">
         <div class="title">PastaBin</div>
 
@@ -15,6 +11,10 @@
                 <li>highlight.js</li>
             </ul>
         </div>
+    </div>
+
+    <div class="content">
+        <div class="code">@yield('code')</div>
     </div>
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"
