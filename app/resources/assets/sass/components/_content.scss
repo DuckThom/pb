@@ -1,9 +1,9 @@
-.content {
+#content-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
 
-  .code {
+  .content {
     position: absolute;
     top: 0;
     left: 0;
@@ -11,36 +11,40 @@
     min-width: 100%;
     padding: 0 0 0 300px;
 
-    div {
-      padding: 0 5px;
-      white-space: pre;
-      font-family: monospace;
+    .code {
+      padding: 0;
 
-      &.target {
-        background: #111 !important;
+      div {
+        padding: 0 5px;
+        white-space: pre;
+        font-family: monospace;
+
+        &.target {
+          background: #111 !important;
+
+          &:before {
+            content: '>' attr(data-prefix);
+          }
+        }
+
+        &:hover {
+          background: #111 !important;
+          cursor: pointer;
+        }
+
+        &:nth-of-type(odd) {
+          background: rgba(255,255,255,0.03);
+        }
 
         &:before {
-          content: '>' attr(data-prefix);
+          content: attr(data-prefix);
+          border-right: 1px solid rgba(255, 255, 255, 0.4);
+          padding: 2px 5px;
+          margin: 0 5px;
+          text-align: right;
+          display: inline-block;
+          width: 75px;
         }
-      }
-
-      &:hover {
-        background: #111 !important;
-        cursor: pointer;
-      }
-
-      &:nth-of-type(odd) {
-        background: rgba(255,255,255,0.03);
-      }
-
-      &:before {
-        content: attr(data-prefix);
-        border-right: 1px solid rgba(255, 255, 255, 0.4);
-        padding: 2px 5px;
-        margin: 0 5px;
-        text-align: right;
-        display: inline-block;
-        width: 75px;
       }
     }
   }

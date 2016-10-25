@@ -1,5 +1,5 @@
 // Font
-@import url('https://fonts.googleapis.com/css?family=Dosis:200,300');
+@import url('https://fonts.googleapis.com/css?family=Dosis:200,300,500');
 
 // Components
 @import 'components/content';
@@ -18,4 +18,13 @@ body {
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+// Overrides
+.CodeMirror {
+  height: 100% !important;
+
+  &:hover {
+    cursor: text;
+  }
 }

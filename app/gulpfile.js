@@ -14,5 +14,15 @@ const elixir = require('laravel-elixir');
 elixir(mix => {
     mix.sass('app.scss');
 
-    mix.version('css/app.css');
+    mix.copy('node_modules/codemirror/lib/codemirror.css', 'public/css');
+    mix.copy('node_modules/codemirror/theme/solarized.css', 'public/css');
+
+    mix.scripts([
+        './node_modules/codemirror/lib/codemirror.js',
+        './node_modules/codemirror/mode/javascript/javascript.js'
+    ], 'public/js/codemirror.js');
+
+    mix.version([
+        'css/app.css'
+    ]);
 });

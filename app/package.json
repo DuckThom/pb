@@ -5,6 +5,7 @@
     "dev": "gulp watch"
   },
   "dependencies": {
+    "codemirror": "^5.20.2",
     "gulp": "^3.9.1",
     "laravel-elixir": "^6.0.0-9"
   }

@@ -11,8 +11,8 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
-});
+$app->get('/', 'BinController@create');
+
+$app->post('save', 'BinController@save');
 
 $app->get('{slug}', 'BinController@show');

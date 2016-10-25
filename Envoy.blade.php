@@ -19,6 +19,8 @@
 
     composer install
 
+    npm install
+
     npm run prod
 
     docker exec pb_php_1 php artisan migrate --force
