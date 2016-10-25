@@ -27,7 +27,7 @@ $app->withFacades(true, [
     'Illuminate\Support\Facades\File' => 'File'
 ]);
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
