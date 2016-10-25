@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Paste;
 use File;
 
 /**
@@ -20,17 +21,25 @@ class BinController extends Controller
     public function show($slug)
     {
         $path = storage_path("code/{$slug}/index.txt");
+        $paste = Paste::findBySlug($slug);
 
-        if (File::exists($path)) {
-            $code = File::get($path);
-            $lines = explode("\n", $code);
-
-            return view('paste.show', [
-                'lines' => $lines
-            ]);
-        } else {
-            abort(404, "Paste not found");
+        if (!File::exists($path) && $paste === null) {
+            return abort(404, "Paste not found");
         }
+
+        if (!$paste && File::exists($path)) {
+            $code = File::get($path);
+
+            $paste = new Paste;
+            $paste->slug = $slug;
+            $paste->content = $code;
+            $paste->creator = 'anonymous';
+            $paste->save();
+        }
+
+        return view('paste.show', [
+            'paste' => $paste
+        ]);
     }
 
 }
