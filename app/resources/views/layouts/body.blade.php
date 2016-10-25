@@ -2,6 +2,19 @@
     <div class="sidebar">
         <div class="title">PastaBin</div>
 
+        <div class="content">
+            <button class="btn btn-copy">Copy url</button>
+            <button class="btn btn-fork">Fork on GitHub</button>
+            <button class="btn btn-fork">Fork on Kopy.io</button>
+
+            <hr />
+
+            <dl>
+                <dt>Created at</dt>
+                <dd>{{ $paste->created_at->format('Y-m-d H:m:s') }}</dd>
+            </dl>
+        </div>
+
         <div class="footer">
             <h2>Powered by</h2>
 
