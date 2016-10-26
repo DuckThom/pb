@@ -9,6 +9,7 @@
 
     <ul class="powered-by">
         <li>Lumen</li>
+        <li>CodeMirror</li>
         <li>Fiche</li>
         <li>highlight.js</li>
     </ul>
