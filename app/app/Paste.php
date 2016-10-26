@@ -5,14 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class App\Paste
- * @package App
+ * Class App\Paste.
  */
 class Paste extends Model
 {
-
     /**
-     * Find a paste by its slug
+     * Find a paste by its slug.
      *
      * @param  string  $slug
      * @return static|null
@@ -23,18 +21,18 @@ class Paste extends Model
     }
 
     /**
-     * Get creator value or default to 'anonymous'
+     * Get creator value or default to 'anonymous'.
      *
      * @param  null|string  $value
      * @return string
      */
     public function getCreatorAttribute($value)
     {
-        return ($value ?? 'anonymous');
+        return $value ?? 'anonymous';
     }
 
     /**
-     * Return an array with lines of the paste
+     * Return an array with lines of the paste.
      *
      * @return array
      */
@@ -42,5 +40,4 @@ class Paste extends Model
     {
         return explode("\n", $this->content);
     }
-
 }

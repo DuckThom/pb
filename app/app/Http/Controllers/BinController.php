@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Paste;
-use File, Validator;
+use File;
+use Validator;
 use Illuminate\Http\Request;
 
 /**
- * Class BinController
- * @package App\Http\Controllers
+ * Class BinController.
  */
 class BinController extends Controller
 {
-
     /**
-     * Show editor
+     * Show editor.
      *
      * @return \Illuminate\View\View
      */
@@ -24,7 +23,7 @@ class BinController extends Controller
     }
 
     /**
-     * Save the paste
+     * Save the paste.
      *
      * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
@@ -32,7 +31,7 @@ class BinController extends Controller
     public function save(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'code' => 'required|min:5'
+            'code' => 'required|min:5',
         ]);
 
         if ($validator->passes()) {
@@ -45,17 +44,17 @@ class BinController extends Controller
             $paste->save();
 
             return response()->json([
-                'url' => url($slug)
+                'url' => url($slug),
             ], 200);
         }
 
         return response()->json([
-            'message' => $validator->errors()->first()
+            'message' => $validator->errors()->first(),
         ], 400);
     }
 
     /**
-     * Show a paste
+     * Show a paste.
      *
      * @param  string  $slug
      * @return \Illuminate\View\View
@@ -65,11 +64,11 @@ class BinController extends Controller
         $path = storage_path("code/{$slug}/index.txt");
         $paste = Paste::findBySlug($slug);
 
-        if (!File::exists($path) && $paste === null) {
-            return abort(404, "Paste not found");
+        if (! File::exists($path) && $paste === null) {
+            return abort(404, 'Paste not found');
         }
 
-        if (!$paste && File::exists($path)) {
+        if (! $paste && File::exists($path)) {
             $code = File::get($path);
 
             $paste = new Paste;
@@ -80,12 +79,12 @@ class BinController extends Controller
         }
 
         return view('paste.show', [
-            'paste' => $paste
+            'paste' => $paste,
         ]);
     }
 
     /**
-     * Edit a paste
+     * Edit a paste.
      *
      * @param  string  $slug
      * @return \Illuminate\View\View
@@ -96,15 +95,15 @@ class BinController extends Controller
 
         if ($paste) {
             return view('paste.editor', [
-                'paste' => $paste
+                'paste' => $paste,
             ]);
         } else {
-            return abort(404, "Paste not found");
+            return abort(404, 'Paste not found');
         }
     }
 
     /**
-     * Generate a slug
+     * Generate a slug.
      *
      * @param  int  $size
      * @return string
@@ -112,7 +111,7 @@ class BinController extends Controller
     private function generateSlug($size)
     {
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!';
-        $slug  = '';
+        $slug = '';
         $count = 0;
 
         // Run until the end of times
@@ -123,5 +122,4 @@ class BinController extends Controller
 
         return $slug;
     }
-
 }
