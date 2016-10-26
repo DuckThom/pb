@@ -16,7 +16,7 @@
 @endsection
 
 @section('before_body_end')
-    <script src="/js/codemirror.js"></script>
+    <script src="{{ elixir('js/codemirror.js') }}"></script>
     <script>
         window.CodeMirror = CodeMirror.fromTextArea(document.getElementById('editor'), {
             lineNumbers: true,

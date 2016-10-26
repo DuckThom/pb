@@ -17,12 +17,16 @@ elixir(mix => {
     mix.copy('node_modules/codemirror/lib/codemirror.css', 'public/css');
     mix.copy('node_modules/codemirror/theme/solarized.css', 'public/css');
 
+    mix.copy('node_modules/jquery/dist/jquery.min.js', 'public/js');
+
     mix.scripts([
         './node_modules/codemirror/lib/codemirror.js',
         './node_modules/codemirror/mode/javascript/javascript.js'
     ], 'public/js/codemirror.js');
 
     mix.version([
-        'css/app.css'
+        'css/app.css',
+        'js/jquery.min.js',
+        'js/codemirror.js'
     ]);
 });
