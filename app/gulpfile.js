@@ -12,7 +12,9 @@ const elixir = require('laravel-elixir');
  */
 
 elixir(mix => {
-    mix.sass('app.scss');
+    mix.sass('app.scss')
+
+    mix.copy('node_modules/clipboard/dist/clipboard.min.js', 'public/js');
 
     mix.copy('node_modules/codemirror/lib/codemirror.css', 'public/css');
     mix.copy('node_modules/codemirror/theme/solarized.css', 'public/css');
@@ -26,6 +28,7 @@ elixir(mix => {
     mix.version([
         'css/app.css',
         'js/jquery.min.js',
-        'js/codemirror.js'
+        'js/codemirror.js',
+        'js/clipboard.min.js'
     ]);
 });

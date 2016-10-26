@@ -28,7 +28,7 @@ if (! function_exists('public_path')) {
 
 if (! function_exists('secure_url')) {
     /**
-     * Generate a https url
+     * Generate a https url.
      *
      * @param  string  $path
      * @param  array  $params

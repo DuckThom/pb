@@ -35,14 +35,25 @@
             if (lineCount != prevLineCount) {
                 window.editor.save();
 
+                var mode;
                 var code = $('#editor').val();
                 var detectedLanguage = (code.indexOf("\<\?php") === -1 ? hljs.highlightAuto(code).language : 'php');
 
                 prevLineCount = lineCount;
 
-                // Set highlighting
-                CodeMirror.autoLoadMode(window.editor, detectedLanguage);
-                editor.setOption('mode', detectedLanguage);
+                if (['c', 'cs', 'cpp'].indexOf(detectedLanguage) > -1) {
+                    mode = 'clike';
+                } else {
+                    mode = detectedLanguage;
+                }
+
+                if (mode != editor.getOption('mode')) {
+                    console.log("Set language to '" + mode + "'");
+
+                    // Set highlighting
+                    CodeMirror.autoLoadMode(window.editor, mode);
+                    editor.setOption('mode', mode);
+                }
             }
         }.bind(window.editor));
 

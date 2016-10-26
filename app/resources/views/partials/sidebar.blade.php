@@ -13,3 +13,5 @@
         <li>highlight.js</li>
     </ul>
 </div>
+
+<div id="alert" class=""></div>

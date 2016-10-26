@@ -11,15 +11,16 @@
 
 @section('sidebar_content')
     <a class="btn btn-block" href="/">New paste</a>
-    <button class="btn btn-block">Copy url</button>
-    <button class="btn btn-block">Fork on GitHub</button>
-    <button class="btn btn-block">Fork on Kopy.io</button>
+    <button id="btn-copy"
+            data-clipboard-action="copy"
+            data-clipboard-text="{{ secure_url($paste->slug) }}"
+            class="btn btn-block">Copy url</button>
 
     <hr />
 
     <dl>
         <dt>Created at</dt>
-        <dd>{{ $paste->created_at->format('Y-m-d H:m') }}</dd>
+        <dd>{{ $paste->created_at->format('Y-m-d h:i') }}</dd>
 
         <dt>Creator</dt>
         <dd>{{ $paste->creator }}</dd>
@@ -27,6 +28,24 @@
 @endsection
 
 @section('before_body_end')
+    <script src="{{ elixir('js/clipboard.min.js') }}"></script>
+    <script>
+        var clipboard = new Clipboard('#btn-copy');
+        var $alert = $('#alert');
+
+        clipboard.on('success', function(e) {
+            $alert.html('Link copied!').addClass('alert-success');
+
+            $alert.animate({ bottom: '20px' }, 400, 'swing', function () {
+                $alert.delay(5000)
+                    .animate({ bottom: '-999px' }, 400, 'swing', function () {
+                        $alert.removeClass('alert-success').html('');
+                    })
+            })
+
+            e.clearSelection();
+        });
+    </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
     <script>
         $('div.code').each(function(i, block) {
