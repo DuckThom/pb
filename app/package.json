@@ -5,6 +5,7 @@
     "dev": "gulp watch"
   },
   "dependencies": {
+    "clipboard": "^1.5.15",
     "codemirror": "^5.20.2",
     "gulp": "^3.9.1",
     "jquery": "^2.2.4",
