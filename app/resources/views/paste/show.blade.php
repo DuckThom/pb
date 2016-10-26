@@ -10,7 +10,7 @@
 @endsection
 
 @section('sidebar_content')
-    <a class="btn btn-block" href="/">New paste</a>
+    <a class="btn btn-block" href="/">New pasta</a>
     <button id="btn-copy"
             data-clipboard-action="copy"
             data-clipboard-text="{{ secure_url($paste->slug) }}"
