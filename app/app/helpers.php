@@ -25,3 +25,17 @@ if (! function_exists('public_path')) {
         return base_path('public'.$path);
     }
 }
+
+if (! function_exists('secure_url')) {
+    /**
+     * Generate a https url
+     *
+     * @param  string  $path
+     * @param  array  $params
+     * @return string
+     */
+    function secure_url($path = '', $params = [])
+    {
+        return url($path, $params, true);
+    }
+}
