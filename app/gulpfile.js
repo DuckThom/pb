@@ -19,10 +19,9 @@ elixir(mix => {
 
     mix.copy('node_modules/jquery/dist/jquery.min.js', 'public/js');
 
-    mix.scripts([
-        './node_modules/codemirror/lib/codemirror.js',
-        './node_modules/codemirror/mode/javascript/javascript.js'
-    ], 'public/js/codemirror.js');
+    mix.copy('node_modules/codemirror/lib/codemirror.js', 'public/js');
+    mix.copy('node_modules/codemirror/mode', 'public/js/modes');
+    mix.copy('node_modules/codemirror/addon', 'public/js/addons');
 
     mix.version([
         'css/app.css',
