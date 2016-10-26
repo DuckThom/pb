@@ -16,17 +16,38 @@
 @endsection
 
 @section('before_body_end')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
     <script src="{{ elixir('js/codemirror.js') }}"></script>
+    <script src="/js/addons/mode/loadmode.js"></script>
     <script>
-        window.CodeMirror = CodeMirror.fromTextArea(document.getElementById('editor'), {
+        window.editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
             lineNumbers: true,
             theme: 'solarized dark',
-            autofocus: true,
-
+            autofocus: true
         });
 
+        CodeMirror.modeURL = '/js/modes/%N/%N.js';
+
+        var prevLineCount = window.editor.getDoc().lineCount();
+        window.editor.on('changes', function () {
+            var lineCount = window.editor.getDoc().lineCount();
+
+            if (lineCount != prevLineCount) {
+                window.editor.save();
+
+                var code = $('#editor').val();
+                var detectedLanguage = (code.indexOf("\<\?php") === -1 ? hljs.highlightAuto(code).language : 'php');
+
+                prevLineCount = lineCount;
+
+                // Set highlighting
+                CodeMirror.autoLoadMode(window.editor, detectedLanguage);
+                editor.setOption('mode', detectedLanguage);
+            }
+        }.bind(window.editor));
+
         $('#btn-save').on('click', function (e) {
-            window.CodeMirror.save();
+            window.editor.save();
 
             var code = $('#editor').val();
 
