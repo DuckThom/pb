@@ -1,3 +1,5 @@
+@import '../colors';
+
 #content-wrapper {
   position: relative;
   width: 100%;
@@ -11,41 +13,20 @@
     min-width: 100%;
     padding: 0 0 0 300px;
 
-    .code {
-      padding: 0;
+    .CodeMirror-code div:nth-of-type(even) .CodeMirror-line {
+      background: rgba(255,255,255,0.03);
+    }
 
-      div {
-        padding: 0 5px;
-        white-space: pre;
-        font-family: monospace;
+    .CodeMirror-linenumbers {
+      min-width: 50px;
+    }
 
-        &.target {
-          background: #111 !important;
+    .CodeMirror-linebackground.highlighted {
+      background-color: rgba(0,0,0,0.3);
+    }
 
-          &:before {
-            content: '>' attr(data-prefix);
-          }
-        }
-
-        &:hover {
-          background: #111 !important;
-          cursor: pointer;
-        }
-
-        &:nth-of-type(odd) {
-          background: rgba(255,255,255,0.03);
-        }
-
-        &:before {
-          content: attr(data-prefix);
-          border-right: 1px solid rgba(255, 255, 255, 0.4);
-          padding: 2px 5px;
-          margin: 0 5px;
-          text-align: right;
-          display: inline-block;
-          width: 75px;
-        }
-      }
+    .gutter-highlight {
+      padding-left: 10px;
     }
   }
 }

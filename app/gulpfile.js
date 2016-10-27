@@ -25,8 +25,11 @@ elixir(mix => {
     mix.copy('node_modules/codemirror/mode', 'public/js/modes');
     mix.copy('node_modules/codemirror/addon', 'public/js/addons');
 
+    mix.copy('resources/assets/js/app.js', 'public/js');
+
     mix.version([
         'css/app.css',
+        'js/app.js',
         'js/jquery.min.js',
         'js/codemirror.js',
         'js/clipboard.min.js'

@@ -14,6 +14,7 @@
     @yield('after_content')
 
     <script src="{{ elixir('js/jquery.min.js') }}"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
 
     @yield('before_body_end')
 </body>

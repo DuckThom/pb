@@ -1,12 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="code">
-        @foreach($paste->getLines() as $line)
-            <?php $prefix = (strlen($loop->count) < 5 ? str_pad($loop->iteration, 5, " ", STR_PAD_LEFT) : str_pad($loop->iteration, strlen($loop->count), " ", STR_PAD_LEFT)); ?>
-<div data-line="{{ $loop->iteration }}" data-prefix="{{ $prefix }}">{{ $line }}&nbsp;</div>
-        @endforeach
-    </div>
+    <textarea id="code" name="code">{{ $paste->content }}</textarea>
 @endsection
 
 @section('sidebar_content')
@@ -15,8 +10,6 @@
             data-clipboard-action="copy"
             data-clipboard-text="{{ secure_url($paste->slug) }}"
             class="btn btn-block">Copy url</button>
-
-    <hr />
 
     <dl>
         <dt>Created at</dt>
@@ -27,53 +20,88 @@
     </dl>
 @endsection
 
+@section('before_head_end')
+    <link rel="stylesheet" href="/css/codemirror.css">
+    <link rel="stylesheet" href="/css/solarized.css">
+@endsection
+
 @section('before_body_end')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
     <script src="{{ elixir('js/clipboard.min.js') }}"></script>
+    <script src="{{ elixir('js/codemirror.js') }}"></script>
+    <script src="/js/addons/mode/loadmode.js"></script>
     <script>
         var clipboard = new Clipboard('#btn-copy');
-        var $alert = $('#alert');
 
         clipboard.on('success', function(e) {
-            $alert.html('Link copied!').addClass('alert-success');
-
-            $alert.animate({ bottom: '20px' }, 400, 'swing', function () {
-                $alert.delay(5000)
-                    .animate({ bottom: '-999px' }, 400, 'swing', function () {
-                        $alert.removeClass('alert-success').html('');
-                    })
-            })
-
+            showAlert('Link copied!', 'success');
             e.clearSelection();
         });
     </script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
     <script>
-        $('div.code').each(function(i, block) {
-            hljs.highlightBlock(block);
+        var $code = $('#code').val();
+
+        window.code = CodeMirror.fromTextArea(document.getElementById('code'), {
+            lineNumbers: true,
+            gutters: ["highlights", "CodeMirror-linenumbers"],
+            theme: 'solarized dark',
+            autofocus: false,
+            readOnly: 'nocursor',
+            value: code,
+            extraGutterSize: 4
         });
+
+        CodeMirror.modeURL = '/js/modes/%N/%N.js';
+
+        var detectedLanguage = ($code.indexOf("\<\?php") === -1 ? hljs.highlightAuto($code).language : 'php');
+
+        if (['c', 'cs', 'cpp'].indexOf(detectedLanguage) > -1) {
+            mode = 'clike';
+        } else if (['bash', 'sh', 'zsh'].indexOf(detectedLanguage) > -1) {
+            mode = 'shell';
+        } else {
+            mode = detectedLanguage;
+        }
+
+        // Set highlighting
+        CodeMirror.autoLoadMode(window.code, mode);
+        code.setOption('mode', mode);
     </script>
     <script>
-        function hashToArray() {
+        function setHighlight (highlight, lineHandle) {
+            var marker = null;
+
+            if (highlight) {
+                window.code.getDoc().addLineClass(lineHandle, 'background', 'highlighted');
+
+                marker = document.createElement("div");
+                marker.style.color = "#fdf6e3";
+                marker.className = 'gutter-highlight';
+                marker.innerHTML = "▶";
+            } else {
+                window.code.getDoc().removeLineClass(lineHandle, 'background', 'highlighted');
+            }
+
+            return marker;
+        }
+
+        function hashToArray () {
             var currentHash = window.location.hash.replace("#", "");
             return currentHash.split(',');
         }
 
-        function checkHighlights() {
+        function checkHighlights () {
             var lines = hashToArray();
 
-            $('.code > div').each(function (i, el) {
-                var $el = $(el);
-                var line = $el.data('line');
+            window.code.getDoc().eachLine(function (line) {
+                var lineInfo = window.code.lineInfo(line);
+                var index = $.inArray((lineInfo.line+1).toString(), lines);
 
-                if ($.inArray(line.toString(), lines) > -1) {
-                    $el.addClass('target');
-                } else {
-                    $el.removeClass('target');
-                }
+                window.code.setGutterMarker(line, 'highlights', setHighlight((index > -1), line));
             });
         }
 
-        function updateHash(line) {
+        function updateHash (line) {
             var lines = hashToArray();
             var index = $.inArray(line.toString(), lines);
 
@@ -88,10 +116,8 @@
             checkHighlights();
         }
 
-        $('.code > div').on('click', function (evt) {
-            var line = $(this).data('line');
-
-            updateHash(line);
+        window.code.on('gutterClick', function (cm, line, gutter, event) {
+            updateHash(line+1);
         });
 
         $(document).ready(function () {
