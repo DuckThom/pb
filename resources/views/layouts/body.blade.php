@@ -1,6 +1,12 @@
 <body>
     @yield('after_body_open')
 
+    <div id="sidebar-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
     <div id="sidebar">
         @include('partials.sidebar')
     </div>

@@ -1,5 +1,32 @@
 @import '../colors';
 
+#sidebar-toggle {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  padding: 5px;
+  z-index: 9001;
+  border: 1px solid $base3;
+  border-radius: 5px;
+  background-color: $base03;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $base3;
+
+    .bar {
+      border-bottom: 1px solid $base03;
+    }
+  }
+
+  .bar {
+    border-bottom: 1px solid $base3;
+    display: block;
+    width: 25px;
+    margin: 8px;
+  }
+}
+
 #sidebar {
   position: fixed;
   top: 0;
@@ -10,6 +37,8 @@
   color: $yellow;
   text-align: center;
   z-index: 10;
+  transition: all 500ms;
+  transition-property: left;
 
   hr {
     border: 1px solid $blue;
@@ -20,8 +49,16 @@
     background-color: $yellow;
     color: $base3;
     font-size: 30px;
-    padding: 20px 0;
+    padding: 40px 0;
     font-weight: 200;
+    position: relative;
+
+    .logo {
+      height: 80px;
+      position: absolute;
+      left: 30px;
+      top: 15px;
+    }
   }
 
   .content {
@@ -93,6 +130,22 @@
       li {
         display: inline-block;
       }
+    }
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  #sidebar-toggle {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 699px) {
+  #sidebar {
+    left: -300px;
+
+    &.show {
+      left: 0;
     }
   }
 }

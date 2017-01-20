@@ -1,4 +1,7 @@
 var $alert = $('#alert');
+var $sidebar = $('#sidebar');
+var $sidebarToggle = $('#sidebar-toggle');
+var $content = $('.content');
 
 var showAlert = function (message, type) {
     $alert.html(message).addClass('alert-' + type);
@@ -9,4 +12,16 @@ var showAlert = function (message, type) {
                 $alert.removeClass('alert-' + type).html('');
             });
     });
-}
+};
+
+var toggleSidebar = function () {
+    if ($sidebar.hasClass('show')) {
+        $sidebar.removeClass('show');
+        $content.removeClass('padded');
+    } else {
+        $sidebar.addClass('show');
+        $content.addClass('padded');
+    }
+};
+
+$sidebarToggle.on('click', toggleSidebar);

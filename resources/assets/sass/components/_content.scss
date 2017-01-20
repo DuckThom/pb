@@ -12,6 +12,8 @@
     bottom: 0;
     min-width: 100%;
     padding: 0 0 0 300px;
+    transition: all 500ms;
+    transition-property: padding;
 
     .CodeMirror-code div:nth-of-type(even) .CodeMirror-line {
       background: rgba(255,255,255,0.03);
@@ -27,6 +29,18 @@
 
     .gutter-highlight {
       padding-left: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 699px) {
+  #content-wrapper {
+    .content {
+      padding: 0;
+
+      &.padded {
+        padding: 0 0 0 300px;
+      }
     }
   }
 }

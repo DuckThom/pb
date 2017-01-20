@@ -12,7 +12,7 @@ const elixir = require('laravel-elixir');
  */
 
 elixir(mix => {
-    mix.sass('app.scss')
+    mix.sass('app.scss');
 
     mix.copy('node_modules/clipboard/dist/clipboard.min.js', 'public/js');
 
@@ -26,6 +26,8 @@ elixir(mix => {
     mix.copy('node_modules/codemirror/addon', 'public/js/addons');
 
     mix.copy('resources/assets/js/app.js', 'public/js');
+
+    mix.copy('resources/assets/images/**.*', 'public/img');
 
     mix.version([
         'css/app.css',

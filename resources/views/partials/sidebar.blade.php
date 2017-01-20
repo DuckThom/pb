@@ -1,4 +1,6 @@
-<div class="title">PastaBin</div>
+<div class="title">
+    <img src="{{ url('img/logo.png') }}" class="logo" /> PastaBin
+</div>
 
 <div class="content">
     @yield('sidebar_content')
@@ -10,7 +12,6 @@
     <ul class="powered-by">
         <li>Lumen</li>
         <li>CodeMirror</li>
-        <li>Fiche</li>
         <li>highlight.js</li>
     </ul>
 </div>
