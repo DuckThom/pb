@@ -1,5 +1,9 @@
+/vendor
 /.idea
-/mysql
-/code
-docker-compose.yml
-.slack_webhook
+/node_modules
+Homestead.json
+Homestead.yaml
+.env
+/public/css
+/public/build
+/public/js

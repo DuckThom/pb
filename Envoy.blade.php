@@ -1,31 +1,19 @@
-@servers(['prod' => 'calypso'])
+@servers(['prod' => 'reach'])
 
 @setup
     $slack_webhook = file_get_contents('.slack_webhook')
 @endsetup
 
 @task('deploy', ['on' => $server, 'confirm' => true])
-    cd docker/pb
+    cd /repositories/pastabin
 
     git pull origin master
 
-    @if ($docker)
-        docker-compose build
-
-        docker-compose up -d
-    @endif
-
-    cd app
-
     composer install
 
-    npm install
+    yarn
 
     npm run prod
-
-    docker exec pb_php_1 php artisan migrate --force
-
-    docker exec pb_php_1 php artisan cache:clear
 @endtask
 
 @after
